@@ -1,0 +1,69 @@
+<head>
+    <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
+    <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
+    <title>Like Post App</title>
+</head>
+<body>
+    <py-script>         
+        import yliveticker
+        from collections import defaultdict, deque
+        from functools import partial
+
+        class DataStream():
+            def __init__(self,ticker) -> None:
+
+                self.tickers = [str(ticker)] # list of tickers to be read from socket
+                self.data = defaultdict(partial(deque, maxlen=20)) # {TICKER : DEQUE}, each deque keeps 20 vals
+
+                self.open_socket() # initializes the socket connection
+
+            def open_socket(self,) -> None:
+                yliveticker.YLiveTicker(on_ticker=self.on_new_msg, ticker_names=self.tickers) # uses the yliveticker to create the websocket
+
+            def on_new_msg(self, ws, msg) -> None: # every time new data comes in from the websocket, it is processed in this function
+                
+                # print(str(msg['id']) + '\t' + str(msg['price']) + '\t' + str(msg['timestamp']))
+                print(str(msg['price']))
+                self.data_proc(str(msg['id']), float(msg['price']), str(msg['timestamp'])) # with the data, send it to another function to store in our dictionary
+                
+                
+            def data_proc(self, ticker, price, timestamp) -> None:
+
+                if not self.data[ticker] or self.data[ticker][-1][1] != timestamp: # only store new data if it's from a new timestamp, prevents duplicate prices @ same time
+                    self.data[ticker].append([price, timestamp])
+                    return(price) 
+        </py-script>|
+    asaas
+     {% for p in posts %}
+        <div class="container"
+            data-name="{{ p.customer_name }}"
+            data-content="{{ p.customer_name }}">
+            {{ p.customer_name }}
+        </div>
+    {% endfor %}
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    
+    
+    <script type="text/javascript">
+    
+        $(document).ready(function(){
+            $('div.container').click(function(event){
+                var name = $(event.target).attr('data-name');
+                var content = $(event.target).attr('data-content');
+                $.ajax({
+                    url: 'web_s',
+                    type: 'POST',
+                    data: {
+                        'name': customer_name,
+                        'content':customer_name
+                    },
+                    success: function(data) {
+                        alert('Load was performed.');
+                    }
+                });
+            });
+        });
+</script>
+</body>
+</html>

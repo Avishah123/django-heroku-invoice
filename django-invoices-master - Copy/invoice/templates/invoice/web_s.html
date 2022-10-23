@@ -1,0 +1,39 @@
+<head>
+    
+    <title>Like Post App</title>
+</head>
+<body>
+      asaas
+     {% for p in posts %}
+        <div class="container"
+            data-name="{{ p.invoice_id }}"
+            data-content="{{ p.customer_name }}">
+            {{ p.invoice_id }}
+        </div>
+    {% endfor %}
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    
+    
+    <script type="text/javascript">
+    
+        $(document).ready(function(){
+            $('div.container').click(function(event){
+                var name = $(event.target).attr('data-name');
+                var content = $(event.target).attr('data-content');
+                $.ajax({
+                    url: 'web_s',
+                    type: 'POST',
+                    data: {
+                        'name': invoice_id,
+                        'content':invoice_id
+                    },
+                    success: function(data) {
+                        alert('Load was performed.');
+                    }
+                });
+            });
+        });
+</script>
+</body>
+</html>

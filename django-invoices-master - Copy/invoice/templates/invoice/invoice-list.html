@@ -1,0 +1,97 @@
+{% extends 'invoice/base.html' %}
+{% block content %}
+<div class="columns is-centered has-text-centered">
+    <div class="column is-half">
+        <div class="card has-background-white-ter">
+            <h1 class="title is-3"></h1>
+        </div>
+    </div>
+</div>
+<form action="{% url 'invoice:invoice-list' %}" method="post">{% csrf_token %}
+    <div class="card">
+        <header class="card-header">
+            <p class="card-header-title">
+                All Orders / Change Order Status &nbsp;<button class="button is-rounded is-info">
+                    <a href="{% url 'invoice:invoice-create' %}" class="has-text-white">Create Invoice</a></button>
+
+                    &nbsp;<button class="button is-rounded is-info">
+                        <a href="/ledger_view" class="has-text-white">Customer Ledger</a></button>
+            </p>
+        </header>
+        <div class="card-content">
+            <div class="content">
+
+                <table class="table is-fullwidth is-bordered is-hoverable is-striped">
+                    <tbody>
+                        <thead>
+                            <tr>
+                                <th>CUSTOMER ID</th>
+                                <th>INVOICE ID</th>
+                                
+                                
+                                <th>DUE DATE</th>
+                                
+                                <th>TOTAL</th>
+                                
+                                <th>View</th>
+                                
+                                <th>Edit Customer Details</th>
+                                <th>Edit Item details </th>
+                                <th>Delete Item </th>
+
+                            </tr>
+                        </thead>
+                        {% for invoice in invoices %}
+                        <tr>
+                            
+                            <td width="1%">{{invoice.customer_id}}</td>
+                            <td width="9%">{{invoice.invoice_id}}</td>
+                            <td> {{invoice.due_date}} </td>
+                            <td> {{invoice.total_amount}}</td>
+                            
+                            
+                            <td>{{invoice.message}}</td>
+                            
+                             <td width="1%"><a href="{% url 'invoice:invoice-detail' id=invoice.invoice_id %}">
+                                <div class="button is-small is-info">View</div>
+                            </a></td>  
+                            
+                            <td width="1%"><a href="update_order1/{{invoice.invoice_id}}/">
+                                <div class="button is-small is-info">Edit</div>
+                            </a></td> 
+
+                            <td width="1%"><a href="testp/{{invoice.invoice_id}}">
+                                <div class="button is-small is-info">Edit</div>
+                            </a></td> 
+
+                            {% comment %} <td width="10%"><a href="update/{{invoice.id}}"> Edit</a></td>
+                            <td width="1%"><a href="/update_order/{{invoice.customer}}"> Edit</a></td>
+                         {% endcomment %}
+                        </tr>
+                        {% endfor %}
+
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div><br /><br /><br />
+    <div class="card has-background-white-ter">
+        <header class="card-header">
+            <p class="card-header-title">
+                Change Order Status
+            </p>
+        </header>
+        <div class="card-content">
+            <div class="select is-rounded">
+                <select id="status" name="status">
+                    <option value="1">Paid</option>
+                    <option value="0">Not Paid</option>
+                </select>
+            </div>
+            <input class="button  is-info is-rounded" type="submit" class="btn" value="Change Status" name="mybtn">
+        </div>
+    </div>
+</form>
+
+{% endblock content %}

@@ -1,0 +1,61 @@
+{% extends 'invoice/base.html' %}
+{% block content %}
+<div class="columns is-centered has-text-centered">
+    <div class="column is-half">
+        <div class="card has-background-white-ter">
+            <h1 class="title is-3"></h1>
+        </div>
+    </div>
+</div>
+
+    <div class="card">
+        
+        <div class="card-content">
+            <div class="content">
+
+                <table class="table is-fullwidth is-bordered is-hoverable is-striped">
+                    <tbody>
+                        <thead>
+                            <tr>
+                                <th>Invoice  ID</th>
+                                <th>Invoice  Total</th>
+                                <th>Due Date</th>
+                                
+                                
+                            
+                                
+                                
+                            </tr>
+                        </thead>
+                        {% for i in items %}
+                        <tr>
+                            
+                            <td width="1%">{{i.invoice_id}}</td>
+                            <td width="9%">{{i.total_amount}}</td>
+                            <td width="9%">{{i.due_date}}</td>
+                            
+                            
+                            
+                            
+                             
+                            
+                            
+                            
+
+                            {% comment %} <td width="10%"><a href="update/{{invoice.id}}"> Edit</a></td>
+                            <td width="1%"><a href="/update_order/{{invoice.customer}}"> Edit</a></td>
+                         {% endcomment %}
+                        </tr>
+                        {% endfor %}
+
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div><br /><br /><br />
+   
+    </div>
+
+
+{% endblock content %}

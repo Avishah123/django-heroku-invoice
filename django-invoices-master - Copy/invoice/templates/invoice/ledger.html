@@ -1,0 +1,43 @@
+{% extends 'invoice/base.html' %}
+{% block content %}
+<div class="columns is-centered has-text-centered">
+    <div class="column is-half">
+        <div class="card has-background-white-ter">
+            <h1 class="title is-3"></h1>
+        </div>
+    </div>
+</div>
+
+    <div class="card">
+        
+        <div class="card-content">
+            <div class="content">
+
+                <table class="table is-fullwidth is-bordered is-hoverable is-striped">
+                    <tbody>
+                        <thead>
+                            <tr>
+                                <th>CUSTOMER ID</th>
+                                <th>Customer Total</th>
+                                <th>View Details</th>
+                            </tr>
+                        </thead>
+                        {% for i in ledger %}
+                        <tr>
+                            <td width="1%">{{i.customer_id}}</td>
+                            <td width="9%">{{i.total_amount}}</td>
+                            <td width="1%"><a href="ledger_view/{{i.customer_id}}">
+                                <div class="button is-small is-info">view</div>
+                            </a></td> 
+
+                        </tr>
+                        {% endfor %}
+
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div><br /><br /><br />
+    </div>
+{% endblock content %}

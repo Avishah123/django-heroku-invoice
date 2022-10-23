@@ -1,0 +1,72 @@
+{% extends 'invoice/base.html' %}
+{% block content %}
+<div class="columns is-centered has-text-centered">
+    <div class="column is-half">
+        <div class="card has-background-white-ter">
+            <h1 class="title is-3"></h1>
+        </div>
+    </div>
+</div>
+<form action="{% url 'invoice:invoice-list' %}" method="post">{% csrf_token %}
+    <div class="card">
+        
+        <div class="card-content">
+            <div class="content">
+                <h2>Delete Items</h2>
+
+                <table class="table is-fullwidth is-bordered is-hoverable is-striped">
+                    <tbody>
+                        <thead>
+                            <tr>
+                                <th>Invoice Id</th>
+                                <th>Service Name</th>
+                                
+                                
+                                <th>Description</th>
+                                
+                                <th>Quantity</th>
+                                
+                                <th>Rate</th>
+                                
+                                <th>Amount </th>
+                                <th>Delete </th>
+
+                            </tr>
+                        </thead>
+                        {% for item in invoice %}
+                        <tr>
+                            <td width="9%">{{item.invoice_id}}</td>
+                            <td width="1%">{{item.service}}</td>
+                            <td width="1%">{{item.description}}</td>
+                            
+                            <td> {{item.quantity}} </td>
+                            <td>{{item.rate}}</td>
+                            <td> {{item.amount}}</td>
+                            
+                            
+                            
+                            
+                             
+                            
+                            <td width="1%"><a href="/delete_item/{{item.pid}}/">
+                                <div class="button is-small is-info">Delete</div>
+                            </a></td> 
+                            {% comment %} <td width="10%"><a href="update/{{invoice.id}}"> Edit</a></td>
+                            <td width="1%"><a href="/update_order/{{invoice.customer}}"> Edit</a></td>
+                         {% endcomment %}
+                        </tr>
+                        {% endfor %}
+
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div><br /><br /><br />
+    <div class="card has-background-white-ter">
+        
+        
+    </div>
+</form>
+
+{% endblock content %}

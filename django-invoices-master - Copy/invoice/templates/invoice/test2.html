@@ -1,0 +1,18 @@
+
+
+
+
+<h1>Display</h1>
+
+{% if invoice %}
+{% for item in invoice %}
+
+Name : {{item.customer }} | Qty : {{item.quantity }} | Rate : {{item.rate }}| Service : {{item.service }} | Amount :  {{item.amount }} |<a href="update_order1/{{invoice.invoice_id}}/">
+    <div class="button is-small is-info">Delete</div>
+</a> <br>
+
+{% endfor %}
+   
+{% else %}
+
+{% endif %}
